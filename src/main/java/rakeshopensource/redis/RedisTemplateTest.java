@@ -14,19 +14,34 @@ public class RedisTemplateTest {
 
     public static void main(String[] args){
     		
-    	ApplicationContext context = new ClassPathXmlApplicationContext(
+    	@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"spring-conf.xml");
  
-    	CachingService<Data> cacheService = (CachingService<Data>)context.getBean("cacheService");
+    	@SuppressWarnings("unchecked")
+		CachingService<Data> cacheService = (CachingService<Data>)context.getBean("cacheService");
     	
-    	Data data = new Data("SalesOrderStatus:0" , "Active");
+    	Data activeStatus = new Data("sales","status:0" , "active");
+    	Data finalStatus = new Data("sales","status:1" , "final");
     	
-    	cacheService.put(data);
+    	cacheService.put(activeStatus);
+    	cacheService.put(finalStatus);
+  
+    	Data activeStatusKey = new Data("sales","status:0");
+    	Data finalStatusKey = new Data("sales","status:1");
     	
-    	Data data1  = cacheService.get(data);
+    	activeStatus  = cacheService.get(activeStatusKey);
+    	finalStatus  = cacheService.get(finalStatusKey);
     	
-    	System.out.println(data1.getKey());
-    	System.out.println(data1.getValue());
+    	System.out.println(activeStatus.toString());
+    	System.out.println(finalStatus.toString());
+    	
+    	
+    	// Store if key doesn't present.
+    	Data financeInvoiceGenerated= new Data("finance", "status:0", "invoice generated");
+    	financeInvoiceGenerated  = cacheService.find(financeInvoiceGenerated);
+    	System.out.println(financeInvoiceGenerated.toString());
+    	
     	
     }
 }

@@ -5,12 +5,10 @@
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<!-- Redis -->
 	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:use-pool="true" p:host-name="${app.config.redis.host}" p:port="${app.config.redis.port}" p:password="${app.config.redis.password}"/>
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" 
 		p:connection-factory-ref="connectionFactory"/>
-	
 
 </beans>

@@ -8,6 +8,8 @@ public interface  CachingService <V extends Cachable> {
 
 	public V get(V key);
 	
+	public V find(V key);
+	
 	public void delete(V key);
 }
 

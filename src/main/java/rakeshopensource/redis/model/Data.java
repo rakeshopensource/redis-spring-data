@@ -4,28 +4,35 @@ public class Data implements Cachable{
 
 	private static final long serialVersionUID = 9200903542564188618L;
 	
+	private String hashKey;
+	private String module;
+	private String value;
+	
 	public Data() {
 		
 	}
 	
-	public Data(String id, String value){
-		this.id = id;
+	public Data(String hashKey,  String module){
+		this.hashKey = hashKey;
+		this.module= module;
+	}
+	
+	public Data(String hashKey,  String module, String value){
+		this.hashKey = hashKey;
+		this.module= module;
 		this.value = value;
 	}
 	
-	private String id;
-	public String getId() {
-		return id;
+	
+
+	public String getHashKey() {
+		return hashKey;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setHashKey(String hashKey) {
+		this.hashKey = hashKey;
 	}
 
-	private String value;
-	
-	public static final String OBJECT_KEY = "DATA";
-	
 	public String getValue() {
 		return value;
 	}
@@ -34,11 +41,27 @@ public class Data implements Cachable{
 		this.value = value;
 	}
 
+	public String getModule() {
+		return module;
+	}
+
+	public void setModule(String module) {
+		this.module = module;
+	}
+	
 	public String getKey() {
-		return getId();
+		return getHashKey();
 	}
 	
 	public String getObjectKey() {
-		return OBJECT_KEY;
+		return getModule();
 	}
+
+	 @Override
+	 public String toString() {
+	        return String.format("[ Module : "  + module + " ] [Key : " + hashKey + " ] [ Value : " + value + " ]");
+	 }
+	
+
+	
 }
