@@ -37,7 +37,7 @@ public class RedisTemplateTest {
     	System.out.println(finalStatus.toString());
     	
     	
-    	// Store if key doesn't present.
+    	// Store if key doesn't exist.
     	Data financeInvoiceGenerated= new Data("finance", "status:0", "invoice generated");
     	financeInvoiceGenerated  = cacheService.find(financeInvoiceGenerated);
     	System.out.println(financeInvoiceGenerated.toString());
